@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 64px; height: 64px; background: transparent; overflow: hidden; }
+    .char-btn {
+      width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; border-radius: 50%;
+      background: rgba(237,232,255,0.92); border: 2.5px solid rgba(155,127,212,0.7);
+      box-shadow: 0 4px 16px rgba(120,90,180,0.25);
+      transition: transform 0.15s, box-shadow 0.15s;
+      -webkit-user-select: none; user-select: none; overflow: hidden;
+    }
+    .char-btn:hover { transform: scale(1.08); box-shadow: 0 6px 20px rgba(120,90,180,0.4); }
+    .char-btn:active { transform: scale(0.95); }
+    .char-btn img { width: 46px; height: 46px; object-fit: contain; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div class="char-btn" id="charBtn"><img id="charImg" src="" alt="char"></div>
+  <script src="../characters.js"></script>
+  <script>
+    const img = document.getElementById('charImg');
+    let isDragging = false, dragMoved = false, startX = 0, startY = 0;
+
+    document.getElementById('charBtn').addEventListener('mousedown', e => {
+      isDragging = true; dragMoved = false; startX = e.screenX; startY = e.screenY; e.preventDefault();
+    });
+    document.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      const dx = e.screenX - startX, dy = e.screenY - startY;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) dragMoved = true;
+      window.electronAPI.dragWindow('char', dx, dy);
+      startX = e.screenX; startY = e.screenY;
+    });
+    document.addEventListener('mouseup', () => {
+      if (isDragging && !dragMoved) window.electronAPI.charClicked();
+      isDragging = false;
+    });
+
+    window.electronAPI.onCharIconChanged(icon => {
+      img.src = CHARACTER_IMAGES[icon] || CHARACTER_IMAGES['cat'];
+    });
+    async function init() {
+      const icon = await window.electronAPI.getCharIcon();
+      img.src = CHARACTER_IMAGES[icon] || CHARACTER_IMAGES['cat'];
+    }
+    init();
+  </script>
+</body>
+</html>

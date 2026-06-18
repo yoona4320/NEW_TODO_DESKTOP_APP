@@ -1,0 +1,59 @@
+{
+  "name": "todo-desktop-float",
+  "version": "1.0.0",
+  "description": "항상 위에 떠다니는 데스크탑 할일 관리 앱",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win",
+    "build:dir": "electron-builder --win --dir",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "appId": "com.yoona.todo-float",
+    "productName": "Todo Desktop Float",
+    "artifactName": "Todo Desktop Float Setup ${version}.exe",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icons/app-icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "assets/icons/app-icon.ico",
+      "uninstallerIcon": "assets/icons/app-icon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Todo Desktop Float"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "yoona4320",
+      "repo": "NEW_TODO_DESKTOP_APP"
+    }
+  },
+  "dependencies": {
+    "electron-store": "^8.2.0",
+    "electron-updater": "^6.1.7",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.9.1"
+  }
+}

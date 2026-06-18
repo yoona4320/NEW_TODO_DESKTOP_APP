@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo Desktop Float</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <div class="header" id="dragHandle">
+      <div class="header-left">
+        <img class="header-icon" id="headerCharImg" src="" alt="char">
+        <span class="header-title">할일 관리</span>
+        <div class="header-version-group">
+          <span class="version-text" id="versionText">v1.0.0</span>
+          <button class="btn-update-inline" id="btnUpdate" title="업데이트 확인">↑</button>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="btn-icon-header" id="btnChangeChar" title="캐릭터 변경">🎨</button>
+        <button class="btn-icon-header" id="btnCalendar" title="캘린더">📅</button>
+        <button class="btn-close-main" id="btnClose" title="닫기">✕</button>
+      </div>
+    </div>
+    <div class="date-bar"><span class="date-text" id="dateText">오늘</span></div>
+    <div class="tab-bar">
+      <button class="tab active" id="tabCurrent" onclick="switchTab('current')">현재</button>
+      <button class="tab" id="tabDone" onclick="switchTab('done')">완료</button>
+    </div>
+    <div class="todo-list-wrapper">
+      <div class="todo-list" id="todoList"></div>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <span class="empty-icon">😴</span><p>할일이 없어요!</p>
+      </div>
+    </div>
+    <div class="add-area">
+      <input type="text" class="add-input" id="addInput" placeholder="+ 할일 추가..." spellcheck="false" maxlength="50">
+      <button class="btn-add" id="btnAdd">추가</button>
+    </div>
+  </div>
+
+  <div class="detail-overlay" id="detailOverlay" style="display:none;">
+    <div class="detail-panel">
+      <div class="detail-header">
+        <button class="btn-back" onclick="closeDetail()">← 뒤로</button>
+        <span class="detail-title-label">상세</span>
+      </div>
+      <div class="detail-body">
+        <div class="detail-icon-row">
+          <button class="detail-icon-btn" onclick="openTodoIconPicker()">
+            <img id="detailIconImg" src="" alt="icon">
+          </button>
+          <span class="detail-icon-hint">아이콘 변경</span>
+        </div>
+        <input type="text" class="detail-title-input" id="detailTitleInput" placeholder="제목" spellcheck="false" maxlength="50">
+        <textarea class="detail-content-input" id="detailContentInput" placeholder="상세 내용..." spellcheck="false" rows="6"></textarea>
+        <label class="detail-done-row">
+          <input type="checkbox" id="detailDoneCheck"><span>완료 처리</span>
+        </label>
+      </div>
+      <div class="detail-footer">
+        <button class="btn-next-day" onclick="applyNextDay()">📅 다음날</button>
+        <button class="btn-delete" onclick="deleteTodo()">🗑 삭제</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay" style="display:none;">
+    <div class="modal">
+      <p class="modal-msg" id="modalMsg"></p>
+      <div class="modal-btns">
+        <button class="modal-btn modal-btn-yes" id="modalYes">예</button>
+        <button class="modal-btn modal-btn-no" id="modalNo">아니오</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../characters.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

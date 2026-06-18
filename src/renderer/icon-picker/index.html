@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>아이콘 선택</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-user-select: none; user-select: none; }
+    :root { --bg:#fdfcff; --bg2:#f5f2ff; --accent:#9b7fd4; --accent2:#c4b0e8; --accent-light:#f0ebff; --text2:#8878aa; --border:#e0d8f5; --shadow:0 8px 32px rgba(100,80,160,0.18); --radius:16px; }
+    html, body { width: 340px; height: 320px; overflow: hidden; background: transparent; font-family: 'Segoe UI','Malgun Gothic',sans-serif; }
+    .container { width: 340px; height: 320px; background: var(--bg); border-radius: var(--radius); box-shadow: var(--shadow); border: 1.5px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+    .header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px 8px; background: linear-gradient(135deg,#ddd0f8,#cfc0f0); border-bottom: 1px solid var(--border); cursor: grab; flex-shrink: 0; }
+    .header:active { cursor: grabbing; }
+    .header-title { font-size: 13px; font-weight: 700; color: #6a4faa; }
+    .btn-close { background: none; border: none; cursor: pointer; color: #6a4faa; font-size: 14px; padding: 2px 6px; border-radius: 6px; }
+    .btn-close:hover { background: rgba(106,79,170,0.12); }
+    .mode-label { padding: 5px 14px; font-size: 11px; font-weight: 600; color: var(--accent); background: var(--bg2); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .icons-wrapper { flex: 1; overflow-y: auto; }
+    .icons-wrapper::-webkit-scrollbar { width: 4px; }
+    .icons-wrapper::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 4px; }
+    .icons-grid { display: grid; grid-template-columns: repeat(5,1fr); padding: 10px; gap: 6px; }
+    .icon-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 4px; background: white; border: 2px solid var(--border); border-radius: 12px; cursor: pointer; transition: all 0.15s; }
+    .icon-btn img { width: 36px; height: 36px; object-fit: contain; }
+    .icon-btn:hover { border-color: var(--accent); background: var(--accent-light); transform: scale(1.06); }
+    .icon-btn.selected { border-color: var(--accent); background: var(--accent-light); box-shadow: 0 0 0 3px var(--accent2); }
+    .icon-label { font-size: 9px; color: var(--text2); text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header" id="dragHandle">
+      <span class="header-title" id="headerTitle">🎨 아이콘 선택</span>
+      <button class="btn-close" id="btnClose">✕</button>
+    </div>
+    <div class="mode-label" id="modeLabel">할일 아이콘 선택</div>
+    <div class="icons-wrapper">
+      <div class="icons-grid" id="iconsGrid"></div>
+    </div>
+  </div>
+  <script src="../characters.js"></script>
+  <script src="icon-picker.js"></script>
+</body>
+</html>
