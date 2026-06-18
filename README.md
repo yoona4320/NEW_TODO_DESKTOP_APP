@@ -1,5 +1,6 @@
 # Todo Desktop Float 🐱
-화면 위에 떠 있는 귀여운 데스크탑 할일 관리 앱 (Electron 기반)
+
+항상 화면 위에 떠 있는 귀여운 데스크탑 할일 관리 앱 (Electron 기반)
 
 ---
 

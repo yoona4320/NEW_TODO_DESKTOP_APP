@@ -1,6 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-
 contextBridge.exposeInMainWorld('electronAPI', {
   getTodos: (date) => ipcRenderer.invoke('get-todos', date),
   saveTodos: (date, todos) => ipcRenderer.invoke('save-todos', date, todos),
@@ -13,7 +12,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   charClicked: () => ipcRenderer.send('char-clicked'),
   openCalendar: () => ipcRenderer.send('open-calendar'),
   closeCalendar: () => ipcRenderer.send('close-calendar'),
-  // mode: 'char' | 'todo'
   openIconPicker: (mode, todoId) => ipcRenderer.send('open-icon-picker', { mode, todoId }),
   closeIconPicker: () => ipcRenderer.send('close-icon-picker'),
   sendIconSelected: (todoId, icon) => ipcRenderer.send('icon-selected', { todoId, icon }),
@@ -26,6 +24,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
   onUpdateDownloaded: (cb) => ipcRenderer.on('update-downloaded', () => cb()),
   onInitPicker: (cb) => ipcRenderer.on('init-picker', (_, data) => cb(data)),
   onCharIconChanged: (cb) => ipcRenderer.on('char-icon-changed', (_, icon) => cb(icon)),
-  removeAllListeners: (ch) => ipcRenderer.removeAllListeners(ch),
-  getCharacterPath: (key) => `asset://assets/characters/${key}.png`
+  removeAllListeners: (ch) => ipcRenderer.removeAllListeners(ch)
 });
