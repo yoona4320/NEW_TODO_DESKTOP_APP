@@ -119,7 +119,7 @@ function createPanelWindow() {
   panelWindow = new BrowserWindow({
     width: PANEL_W, height: PANEL_H, x: pos.x, y: pos.y,
     frame: false, transparent: true, alwaysOnTop: true,
-    resizable: false, skipTaskbar: false, show: false,
+    resizable: false, skipTaskbar: false, show: true,
     webPreferences: { nodeIntegration: false, contextIsolation: true, preload: path.join(__dirname, 'preload.js'), spellcheck: false }
   });
   panelWindow.loadFile(path.join(__dirname, '../renderer/main/index.html'));
@@ -129,6 +129,10 @@ function createPanelWindow() {
     const icon = nativeImage.createFromPath(iconPath);
     if (!icon.isEmpty()) panelWindow.setIcon(icon);
   } catch(e) {}
+  // 로드 완료 후에도 표시 유지 (작업표시줄 아이콘 유지)
+  panelWindow.webContents.once('did-finish-load', () => {
+    isPanelVisible = true;
+  });
   panelWindow.on('move', () => {
     if (!panelWindow) return;
     const [x, y] = panelWindow.getPosition();
@@ -189,6 +193,7 @@ function togglePanel() {
   if (!panelWindow) return;
   if (isPanelVisible) {
     panelWindow.hide();
+    panelWindow.setSkipTaskbar(false);
     isPanelVisible = false;
     // 서브 창들도 모두 닫기
     if (calendarWindow) calendarWindow.close();
@@ -198,6 +203,7 @@ function togglePanel() {
       const pos = getPanelPositionNearChar();
       panelWindow.setPosition(pos.x, pos.y);
     }
+    panelWindow.setSkipTaskbar(false);
     panelWindow.show();
     panelWindow.focus();
     isPanelVisible = true;

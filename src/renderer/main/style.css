@@ -81,21 +81,28 @@ html, body { width: 320px; height: 520px; overflow: hidden; background: transpar
 
 /* ── 상세 헤더 ── */
 .detail-header {
-  display: flex; align-items: center; justify-content: space-between;
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center;
   padding: 8px 12px;
   background: var(--header-grad);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
   min-height: 46px;
 }
-.detail-header-left { display: flex; align-items: center; gap: 8px; }
-.detail-title-label { font-size: 13px; font-weight: 700; color: var(--header-text); line-height: 1; }
+.detail-header .btn-back { justify-self: start; }
+.detail-header .btn-save { justify-self: end; }
+.detail-title-label { font-size: 13px; font-weight: 700; color: var(--header-text); line-height: 1; text-align: center; }
 .detail-icon-btn { background: var(--accent-light); border: 2px solid var(--accent2); border-radius: 10px; padding: 4px 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
 .detail-icon-btn:hover { background: var(--accent2); transform: scale(1.05); }
 .detail-icon-btn img { width: 28px; height: 28px; object-fit: contain; }
+.btn-back { background: none; border: none; cursor: pointer; font-size: 12px; color: var(--header-text); font-weight: 600; padding: 4px 8px; border-radius: 6px; transition: background 0.15s; }
+.btn-back:hover { background: rgba(106,79,170,0.12); }
 .btn-save { background: var(--accent); color: white; border: none; border-radius: var(--radius-sm); padding: 6px 14px; font-size: 12px; font-weight: 700; cursor: pointer; transition: background 0.15s; flex-shrink: 0; }
 .btn-save:hover { background: #7d60b8; }
 
+/* ── 상세 아이콘 행 ── */
+.detail-icon-row { display: flex; align-items: center; gap: 10px; }
+.detail-icon-hint { font-size: 11px; color: var(--text2); }
 /* ── 상세 바디 ── */
 .detail-body { flex: 1; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
 .detail-title-input { width: 100%; padding: 7px 10px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; font-family: inherit; color: var(--text); background: white; outline: none; -webkit-user-select: text; user-select: text; }

@@ -54,14 +54,12 @@
 
       <!-- 상세 헤더 -->
       <div class="detail-header">
-        <div class="detail-header-left">
-          <button class="detail-icon-btn" onclick="openTodoIconPicker()">
-            <img id="detailIconImg" src="" alt="icon">
-          </button>
-          <span class="detail-title-label">상세</span>
-        </div>
+        <button class="btn-back" onclick="closeDetail()">← 뒤로</button>
+        <span class="detail-title-label">상세</span>
         <button class="btn-save" onclick="closeDetail()">저장</button>
       </div>
+      <!-- 숨긴 아이콘 참조용 -->
+      <img id="detailIconImg" src="" alt="icon" style="display:none;">
 
       <div class="detail-body">
 
