@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -7,7 +7,6 @@
 </head>
 <body>
   <div class="app-container">
-
     <div class="header" id="dragHandle">
       <div class="header-left">
         <img class="header-icon" id="headerCharImg" src="" alt="char">
@@ -23,87 +22,56 @@
         <button class="btn-close-main" id="btnClose" title="닫기">✕</button>
       </div>
     </div>
-
-    <div class="date-bar">
-      <span class="date-text" id="dateText">오늘</span>
-    </div>
-
+    <div class="date-bar"><span class="date-text" id="dateText">오늘</span></div>
     <div class="tab-bar">
       <button class="tab active" id="tabCurrent" onclick="switchTab('current')">현재</button>
       <button class="tab" id="tabDone" onclick="switchTab('done')">완료</button>
     </div>
-
     <div class="todo-list-wrapper">
       <div class="todo-list" id="todoList"></div>
       <div class="empty-state" id="emptyState" style="display:none;">
-        <span class="empty-icon">😴</span>
-        <p>할일이 없어요!</p>
+        <span class="empty-icon">😴</span><p>할일이 없어요!</p>
       </div>
     </div>
-
     <div class="add-area">
       <input type="text" class="add-input" id="addInput" placeholder="+ 할일 추가..." spellcheck="false" maxlength="50">
       <button class="btn-add" id="btnAdd">추가</button>
     </div>
-
   </div>
-
-  <!-- 상세 패널 -->
   <div class="detail-overlay" id="detailOverlay" style="display:none;">
     <div class="detail-panel">
-
-      <!-- 상세 헤더 -->
       <div class="detail-header">
         <button class="btn-back" onclick="closeDetail()">← 뒤로</button>
         <span class="detail-title-label">상세</span>
         <button class="btn-save" onclick="closeDetail()">저장</button>
       </div>
-      <!-- 숨긴 아이콘 참조용 -->
       <img id="detailIconImg" src="" alt="icon" style="display:none;">
-
       <div class="detail-body">
-
-        <!-- 제목 -->
         <input type="text" class="detail-title-input" id="detailTitleInput" placeholder="제목" spellcheck="false" maxlength="50">
-
-        <!-- 서식 툴바 -->
         <div class="format-toolbar">
-          <button class="fmt-btn" id="fmtBold" onclick="applyFormat('bold')" title="굵게">B</button>
-          <button class="fmt-btn fmt-italic" id="fmtItalic" onclick="applyFormat('italic')" title="기울임">I</button>
-          <button class="fmt-btn fmt-underline" id="fmtUnderline" onclick="applyFormat('underline')" title="밑줄">U</button>
-          <button class="fmt-btn fmt-strike" id="fmtStrike" onclick="applyFormat('strikeThrough')" title="취소선">S</button>
+          <button class="fmt-btn" onclick="applyFormat('bold')">B</button>
+          <button class="fmt-btn fmt-italic" onclick="applyFormat('italic')">I</button>
+          <button class="fmt-btn fmt-underline" onclick="applyFormat('underline')">U</button>
+          <button class="fmt-btn fmt-strike" onclick="applyFormat('strikeThrough')">S</button>
           <div class="fmt-divider"></div>
           <div class="color-btns">
-            <button class="color-btn" style="background:#2e2840;" onclick="applyColor('#2e2840')" title="기본"></button>
-            <button class="color-btn" style="background:#e05070;" onclick="applyColor('#e05070')" title="빨강"></button>
-            <button class="color-btn" style="background:#e08030;" onclick="applyColor('#e08030')" title="주황"></button>
-            <button class="color-btn" style="background:#c8a800;" onclick="applyColor('#c8a800')" title="노랑"></button>
-            <button class="color-btn" style="background:#3aaa5c;" onclick="applyColor('#3aaa5c')" title="초록"></button>
-            <button class="color-btn" style="background:#2080e0;" onclick="applyColor('#2080e0')" title="파랑"></button>
-            <button class="color-btn" style="background:#9b7fd4;" onclick="applyColor('#9b7fd4')" title="보라"></button>
-            <button class="color-btn" style="background:#c060b0;" onclick="applyColor('#c060b0')" title="분홍"></button>
+            <button class="color-btn" style="background:#2e2840;" onclick="applyColor('#2e2840')"></button>
+            <button class="color-btn" style="background:#e05070;" onclick="applyColor('#e05070')"></button>
+            <button class="color-btn" style="background:#e08030;" onclick="applyColor('#e08030')"></button>
+            <button class="color-btn" style="background:#c8a800;" onclick="applyColor('#c8a800')"></button>
+            <button class="color-btn" style="background:#3aaa5c;" onclick="applyColor('#3aaa5c')"></button>
+            <button class="color-btn" style="background:#2080e0;" onclick="applyColor('#2080e0')"></button>
+            <button class="color-btn" style="background:#9b7fd4;" onclick="applyColor('#9b7fd4')"></button>
+            <button class="color-btn" style="background:#c060b0;" onclick="applyColor('#c060b0')"></button>
           </div>
         </div>
-
-        <!-- 내용 (contenteditable) -->
-        <div
-          class="detail-content-input"
-          id="detailContentInput"
-          contenteditable="true"
-          spellcheck="false"
-          data-placeholder="상세 내용..."
-        ></div>
-
+        <div class="detail-content-input" id="detailContentInput" contenteditable="true" spellcheck="false" data-placeholder="상세 내용..."></div>
         <label class="detail-done-row">
-          <input type="checkbox" id="detailDoneCheck">
-          <span>완료 처리</span>
+          <input type="checkbox" id="detailDoneCheck"><span>완료 처리</span>
         </label>
       </div>
-
     </div>
   </div>
-
-  <!-- 모달 -->
   <div class="modal-overlay" id="modalOverlay" style="display:none;">
     <div class="modal">
       <p class="modal-msg" id="modalMsg"></p>
@@ -113,7 +81,6 @@
       </div>
     </div>
   </div>
-
   <script src="../characters.js"></script>
   <script src="app.js"></script>
 </body>
