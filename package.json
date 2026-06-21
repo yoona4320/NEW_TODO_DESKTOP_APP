@@ -1,6 +1,6 @@
 {
   "name": "todo-desktop-float",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "항상 위에 떠다니는 데스크탑 할일 관리 앱",
   "main": "src/main/main.js",
   "scripts": {
