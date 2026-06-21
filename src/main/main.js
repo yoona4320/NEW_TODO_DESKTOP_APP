@@ -101,6 +101,8 @@ function createCharWindow() {
     webPreferences: { nodeIntegration: false, contextIsolation: true, preload: path.join(__dirname, 'preload.js'), spellcheck: false }
   });
   charWindow.loadFile(path.join(__dirname, '../renderer/char/index.html'));
+  charWindow.setAlwaysOnTop(true, 'screen-saver');
+  charWindow.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
   charWindow.on('move', () => {
     if (!charWindow) return;
     const [x, y] = charWindow.getPosition();
@@ -263,6 +265,17 @@ autoUpdater.on('error', err => console.error('Update error:', err));
 
 // ─── 앱 시작 ────────────────────────────────────────────────────
 app.whenReady().then(() => {
+  // 일정 시간마다 창이 항상 위에 뜨도록 재확인 (시스템 이벤트로 풀리는 경우 방지)
+  setInterval(() => {
+    if (charWindow && !charWindow.isDestroyed()) {
+      charWindow.setAlwaysOnTop(true, 'screen-saver');
+      if (!charWindow.isVisible()) charWindow.show();
+    }
+    if (panelWindow && !panelWindow.isDestroyed() && isPanelVisible) {
+      panelWindow.setAlwaysOnTop(true, 'screen-saver');
+    }
+  }, 5000);
+
   // 작업표시줄 아이콘 설정
   const appIconPath = path.join(__dirname, '../../assets/icons/app-icon.ico');
   const appIcon = nativeImage.createFromPath(appIconPath);
